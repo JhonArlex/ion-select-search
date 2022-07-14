@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build ion-select-search",
     "watch": "ng build --watch --configuration development",
+    "build:iss:watch": "ng build ion-select-search --watch --configuration development",
+    "dev:css": "tailwindcss -o projects/ion-select-search/src/lib/tailwind.css --watch",
     "test": "ng test"
   },
   "private": true,
@@ -23,15 +25,20 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^14.0.5",
     "@angular/cli": "~14.0.5",
     "@angular/compiler-cli": "^14.0.0",
     "@types/jasmine": "~4.0.0",
+    "autoprefixer": "^10.4.7",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^14.0.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.5",
     "typescript": "~4.7.2"
   }
 }

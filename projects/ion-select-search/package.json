@@ -1,0 +1,22 @@
+{
+  "name": "ion-select-search",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./tailwindcss/utilities": {
+      "style": "../../node_modules/tailwindcss/utilities.css"
+    },
+    "./tailwindcss/base": {
+      "style": "../../node_modules/tailwindcss/base.css"
+    },
+    "./tailwindcss/components": {
+      "style": "../../node_modules/tailwindcss/components.css"
+    }
+  }
+}

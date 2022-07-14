@@ -8,6 +8,14 @@
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
+    "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
+      "ion-select-search": [
+        "../ion-library/projects/ion-select-search/src/public-api"
+      ]
+    },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

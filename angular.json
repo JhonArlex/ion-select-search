@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ion-select-search": {
+      "projectType": "library",
+      "root": "projects/ion-select-search",
+      "sourceRoot": "projects/ion-select-search/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ion-select-search/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ion-select-search/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ion-select-search/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ion-select-search/src/test.ts",
+            "tsConfig": "projects/ion-select-search/tsconfig.spec.json",
+            "karmaConfig": "projects/ion-select-search/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }
