@@ -1,10 +1,12 @@
 {
   "name": "ion-library",
   "version": "0.0.0",
+  "sideEffects": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build ion-select-search",
+    "build-dev": "ng build ion-select-search --configuration=development",
     "watch": "ng build --watch --configuration development",
     "build:iss:watch": "ng build ion-select-search --watch --configuration development",
     "dev:css": "tailwindcss -o projects/ion-select-search/src/lib/tailwind.css --watch",

@@ -1,16 +1,15 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { IonSelectSearchService } from './ion-select-search.service';
 
 @Component({
   selector: 'ion-select-search',
-  template: `
-    
+  template: `    
     <div class="content-input w-full flex flex-col">
       <div class="w-full flex gap-1 p-2 flex-wrap" *ngIf="multiple">
         <ion-select-chip *ngFor="let m of multipleOptions" [option]="m" (close)="selectOption($event)"></ion-select-chip>
       </div>
       <div class="w-full flex flex-col relative">
-        <input #inputSelect (keyup)="keyUpAction($event)" type="text" [class]="joinClass" class="h-12 w-full border rounded pl-4 pr-3 font-medium text-base focus:border-2 outline-none" [placeholder]="placeholder"/>
+        <input #inputSelect (focus)="validInputClear()" (keyup)="keyUpAction($event)" type="text" [class]="joinClass" class="h-12 w-full border rounded pl-4 pr-3 font-medium text-base focus:border-2 outline-none" [placeholder]="placeholder"/>
         <button *ngIf="written" (click)="cancelSearch()" class="icon-close"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Close Circle</title><path d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm75.31 260.69a16 16 0 11-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 01-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0122.62-22.62L256 233.37l52.69-52.68a16 16 0 0122.62 22.62L278.63 256z"/></svg></button>
       </div>
       <div *ngIf="written" class="options-list" [class]="theme.backgroundColor">
@@ -24,8 +23,8 @@ import { IonSelectSearchService } from './ion-select-search.service';
   `,
   styleUrls: ['./ion-select-search.component.css', './tailwind.css'],
 })
-export class IonSelectSearchComponent implements OnInit {
-  @ViewChild('inputSelect')  inputSelect!: ElementRef;
+export class IonSelectSearchComponent implements OnInit, OnChanges {
+  @ViewChild('inputSelect') inputSelect!: ElementRef;
   @Input() options: IOption[] = [];
   @Input() multiple: boolean = false;
   @Input() placeholder: string = 'Select';
@@ -44,52 +43,42 @@ export class IonSelectSearchComponent implements OnInit {
   multipleOptions: IOption[] = this.options;
   optionsBackup: IOption[] = [];
   joinClass: string = '';
-  flagOptionsFromService = false;
 
   constructor(
-    private eRef: ElementRef,
-    private ionSelectSearchService: IonSelectSearchService
+    private eRef: ElementRef
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.optionsBackup = this.options;
+  }
 
   ngOnInit(): void {
     this.joinClass = this.theme.backgroundColor + ' ' + this.theme.borderColor + ' ' + this.theme.color + ' focus:' + this.theme.focusBorderColor;
-    this.ionSelectSearchService.options.subscribe(options => {
-      if (options.length > 0) {
-        this.options = options;
-        this.flagOptionsFromService = true;
-      } else {
-        this.flagOptionsFromService = false;
-      }
-    });
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event: { target: any; }) {
-    if(!this.eRef.nativeElement.contains(event.target)) {
+    if (!this.eRef.nativeElement.contains(event.target) && this.written) {
       this.cancelSearch();
     }
   }
 
   keyUpAction(event: any) {
+    this.validInputClear();
     this.validOptions(event);
-    this.validInputClear(event);
   }
 
   validOptions(event: { target: { value: string; }; }) {
-    console.log(this.flagOptionsFromService);
-    if (!this.flagOptionsFromService) {
-      if (this.optionsBackup.length === 0) {
-        this.optionsBackup = this.options
-      }
-      this.options = this.filterOptions(event.target.value, this.optionsBackup);
+    if (this.optionsBackup.length === 0) {
+      this.optionsBackup = this.options
     }
+    this.options = this.filterOptions(event.target.value, this.optionsBackup);
+
   }
 
-  validInputClear(event: { target: { value: string; }; }) {
-    if (event.target.value === '') {
-      this.written = false;
-    } else {
-      this.written = true;
+  validInputClear() {
+    this.written = true;
+    if (this.optionsBackup.length === 0) {
+      this.optionsBackup = this.options
     }
   }
 

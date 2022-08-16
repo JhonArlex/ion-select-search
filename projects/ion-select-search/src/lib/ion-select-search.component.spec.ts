@@ -41,19 +41,6 @@ describe('IonSelectSearchComponent', () => {
     expect(divContent.querySelector('.options-list')).toBeTruthy();
   });
 
-  it('Cuando se eliminan todos los caracteres del input, este debe desaparecer los demas items', () => {
-    const input = fixture.debugElement.nativeElement.querySelector('input');
-    input.focus();
-    input.value = 'jhon';
-    input.dispatchEvent(new Event('keyup'));
-    input.value = '';
-    input.dispatchEvent(new Event('keyup'));
-    fixture.detectChanges();
-    const divContent = fixture.debugElement.nativeElement.querySelector('.content-input');
-    expect(divContent.querySelector('.icon-close')).toBeNull();
-    expect(divContent.querySelector('.options-list')).toBeNull();
-  });
-
   it('Deberá mostrar los items enviados desde el input options cuando se escriba un texto', () => {
     const options: IOption[] = [
       { value: '1', label: 'Opcion 1' },
@@ -321,20 +308,5 @@ describe('IonSelectSearchComponent', () => {
     expect(divContent.querySelector('.icon-close')).toBeNull();
     expect(divContent.querySelector('.options-list')).toBeNull();
   });
-
-  it('Si el input options esta vacio, debe utilizar los options que esta en el servicio y mostrarlos en la vista', fakeAsync(() => {
-    component.options = [];
-    fixture.detectChanges();
-    const input = fixture.nativeElement.querySelector('input');
-    input.value = 'Opcion';
-    input.dispatchEvent(new Event('keyup'));
-    fixture.detectChanges();
-    ionSelectSearchService.options.next([{ value: '1', label: 'Opcion 1'}, { value: '2', label: 'Opcion 2'}, { value: '3', label: 'Opcion 3'}]);
-    tick();
-    fixture.detectChanges();
-    const divContent = fixture.nativeElement.querySelector('.content-input');
-    expect(divContent.querySelector('.options-list').querySelectorAll('li').length).toBe(3);
-  }));
-
   
 });
