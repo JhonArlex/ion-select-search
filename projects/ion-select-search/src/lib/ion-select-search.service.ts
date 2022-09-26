@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IOption } from './ion-select-search.component';
+import { IOption } from './model';
 
 @Injectable({
   providedIn: 'root'

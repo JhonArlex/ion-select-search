@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { IonSelectSearchService } from './ion-select-search.service';
+import { IOption, IThemeSelectSearch } from './model';
 
 @Component({
   selector: 'ion-select-search',
@@ -122,15 +122,3 @@ export class IonSelectSearchComponent implements OnInit, OnChanges {
 }
 
 
-export interface IOption {
-  value: string;
-  label: string;
-}
-
-export interface IThemeSelectSearch {
-  color: string;
-  backgroundColor: string;
-  focusBorderColor: string;
-  borderColor: string;
-  hoverOption: string;
-}

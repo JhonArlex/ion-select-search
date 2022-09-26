@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IOption } from '../ion-select-search.component';
+import { IOption } from '../model';
 
 @Component({
   selector: 'ion-select-chip',
