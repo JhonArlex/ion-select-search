@@ -7,10 +7,12 @@
     "start": "ng serve",
     "build": "ng build ion-select-search",
     "build-dev": "ng build ion-select-search --configuration=development",
+    "build-prod": "ng build ion-select-search --configuration=production",
     "watch": "ng build --watch --configuration development",
     "build:iss:watch": "ng build ion-select-search --watch --configuration development",
     "dev:css": "tailwindcss -o projects/ion-select-search/src/lib/tailwind.css --watch",
-    "test": "ng test"
+    "test": "ng test",
+    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {
