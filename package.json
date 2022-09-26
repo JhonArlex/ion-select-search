@@ -1,4 +1,7 @@
 {
+  "author": {
+    "name": "Jhon Ocampo"
+  },
   "name": "ion-library",
   "version": "0.0.0",
   "sideEffects": false,
